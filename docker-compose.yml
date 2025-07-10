@@ -1,0 +1,33 @@
+---
+services:
+  woodpecker-server:
+    image: woodpeckerci/woodpecker-server:${VERSION}
+    container_name: woodpecker-server
+    restart: unless-stopped
+    ports:
+      - "${WOODPECKER_UI_PORT}:8000"     # Woodpecker UI/API
+    expose:
+      - "9000"                           # gRPC for agents
+    volumes:
+      - ${WOODPECKER_SERVER_VOLUME}/woodpecker-server:/var/lib/woodpecker/
+    environment:
+      - WOODPECKER_HOST=${WOODPECKER_HOST}
+      - WOODPECKER_OPEN=${WOODPECKER_OPEN}
+      - WOODPECKER_ADMIN=${WOODPECKER_ADMIN}
+      - WOODPECKER_GITEA=${WOODPECKER_GITEA}
+      - WOODPECKER_GITEA_URL=${WOODPECKER_GITEA_URL}
+      - WOODPECKER_GITEA_CLIENT=${WOODPECKER_GITEA_CLIENT}
+      - WOODPECKER_GITEA_SECRET=${WOODPECKER_GITEA_SECRET}
+      - WOODPECKER_AGENT_SECRET=${WOODPECKER_AGENT_SECRET}
+
+  woodpecker-agent:
+    image: woodpeckerci/woodpecker-agent:${VERSION}
+    container_name: woodpecker-agent
+    restart: unless-stopped
+    depends_on:
+      - woodpecker-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WOODPECKER_SERVER=woodpecker-server:9000
+      - WOODPECKER_AGENT_SECRET=${WOODPECKER_AGENT_SECRET}
