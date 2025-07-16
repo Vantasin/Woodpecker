@@ -43,15 +43,15 @@ tank/
 
    If using ZFS:
    ```bash
-   sudo zfs create -p tank/docker/compose/Woodpecker
-   cd /tank/docker/compose/Woodpecker
+   sudo zfs create -p tank/docker/compose/woodpecker
+   cd /tank/docker/compose/woodpecker
    sudo git clone https://github.com/Vantasin/Woodpecker.git .
    ```
 
    If using standard directories:
    ```bash
-   mkdir -p ~/docker/compose/Woodpecker
-   cd ~/docker/compose/Woodpecker
+   mkdir -p ~/docker/compose/woodpecker
+   cd ~/docker/compose/woodpecker
    git clone https://github.com/Vantasin/Woodpecker.git .
    ```
 
@@ -59,12 +59,12 @@ tank/
 
    If using ZFS:
    ```bash
-   sudo zfs create -p tank/docker/data/Woodpecker
+   sudo zfs create -p tank/docker/data/woodpecker
    ```
 
    If using standard directories:
    ```bash
-   mkdir -p ~/docker/data/Woodpecker
+   mkdir -p ~/docker/data/woodpecker
    ```
 
 3. **Configure environment variables**
