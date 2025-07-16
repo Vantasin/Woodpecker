@@ -1,3 +1,120 @@
 # Woodpecker
 
 Woodpecker CI is a lightweight, self-hosted Continuous Integration (CI) and Continuous Deployment (CD) system, designed to automatically build, test, and deploy your code whenever you push changes to your source code repository.
+
+# 📦 Woodpecker Docker Compose Stack
+
+[![MIT License](https://img.shields.io/github/license/Vantasin/Woodpecker?style=flat-square)](LICENSE)
+[![Docker Pulls: Woodpecker/Woodpecker](https://img.shields.io/docker/pulls/Woodpecker/Woodpecker?style=flat-square&logo=docker)](https://hub.docker.com/r/Woodpecker/Woodpecker)
+[![ZFS](https://img.shields.io/badge/ZFS-OpenZFS-blue?style=flat-square)](https://openzfs.org/)
+
+This repository contains a minimal and production-ready [Woodpecker](https://Woodpecker.io/) stack using Docker Compose.  
+**Woodpecker** is a lightweight, self-hosted Git service offering Git repository hosting, code review, issue tracking, and CI integration.
+
+---
+
+## 📁 Directory Structure
+
+```bash
+tank/
+├── docker/
+│   ├── compose/
+│   │   └── Woodpecker/              # Git repo lives here
+│   │       ├── docker-compose.yml  # Main Docker Compose config
+│   │       ├── .env                # Runtime environment variables and secrets (gitignored!)
+│   │       ├── env.example         # Example .env file for reference
+│   │       └── README.md           # This file
+│   └── data/
+│       └── Woodpecker/              # Volume mounts and persistent data
+```
+
+---
+
+## 🧰 Prerequisites
+
+* Docker Engine
+* Docker Compose V2
+* Git
+* (Optional) ZFS on Linux for dataset management
+
+> ⚠️ **Note:** These instructions assume your ZFS pool is named `tank`. If your pool has a different name (e.g., `rpool`, `zdata`, etc.), replace `tank` in all paths and commands with your actual pool name.
+
+---
+
+## ⚙️ Setup Instructions
+
+1. **Create the stack directory and clone the repository**
+
+   If using ZFS:
+   ```bash
+   sudo zfs create -p tank/docker/compose/Woodpecker
+   cd /tank/docker/compose/Woodpecker
+   sudo git clone https://github.com/Vantasin/Woodpecker.git .
+   ```
+
+   If using standard directories:
+   ```bash
+   mkdir -p ~/docker/compose/Woodpecker
+   cd ~/docker/compose/Woodpecker
+   git clone https://github.com/Vantasin/Woodpecker.git .
+   ```
+
+2. **Create the runtime data directory** (optional)
+
+   If using ZFS:
+   ```bash
+   sudo zfs create -p tank/docker/data/Woodpecker
+   ```
+
+   If using standard directories:
+   ```bash
+   mkdir -p ~/docker/data/Woodpecker
+   ```
+
+3. **Configure environment variables**
+
+   Copy and modify the `.env` file:
+
+   ```bash
+   sudo cp env.example .env
+   sudo nano .env
+   sudo chmod 600 .env
+   ```
+
+   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_SERVER_VOLUME`.
+
+     - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
+
+     - The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
+
+     - The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
+
+     - You can generate the `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET` by visiting (in Gitea) Settings -> Applications -> Manage OAuth2 applications.
+
+     - The `WOODPECKER_AGENT_SECRET` is a random user generated password of your choice, avoid special characters and symbols.
+
+4. **Start Woodpecker**
+
+   ```bash
+   docker compose up -d
+   ```
+
+---
+
+## 🌐 Accessing Woodpecker Web UI
+
+Once deployed, access Woodpecker using:
+
+- **Web Interface (HTTP):** `http://localhost:8002` or replace `localhost` with your server’s IP address.  
+- **Login:** You'll see a `Login with Gitea` button.
+> **Note:** If you don’t see the `Login with Gitea` button, check that your `.env` file.
+
+---
+
+## 🙏 Acknowledgments
+
+- [ChatGPT](https://openai.com/chatgpt) — for assistance in generating setup scripts and templates.
+- [Woodpecker CI](https://github.com/woodpecker-ci/woodpecker) — the official source code and Docker images for the Woodpecker continuous integration system.
+- [Woodpecker Documentation](https://woodpecker-ci.org/docs/intro) — the official user guide and admin reference for configuring and troubleshooting Woodpecker.
+- [Docker](https://www.docker.com/) — for container orchestration and runtime.
+- [OpenZFS](https://openzfs.org/) — for advanced local filesystem features, dataset organization, and snapshotting.
