@@ -1,15 +1,11 @@
-# Woodpecker
-
-Woodpecker CI is a lightweight, self-hosted Continuous Integration (CI) and Continuous Deployment (CD) system, designed to automatically build, test, and deploy your code whenever you push changes to your source code repository.
-
 # 📦 Woodpecker Docker Compose Stack
 
 [![MIT License](https://img.shields.io/github/license/Vantasin/Woodpecker?style=flat-square)](LICENSE)
 [![Woodpecker CI](https://img.shields.io/badge/Woodpecker%20CI-self--hosted-green?logo=drone&style=flat-square)](https://woodpecker-ci.org/)
 [![ZFS](https://img.shields.io/badge/ZFS-OpenZFS-blue?style=flat-square)](https://openzfs.org/)
 
-This repository contains a minimal and production-ready [Woodpecker](https://woodpecker-ci.org/) stack using Docker Compose.  
-**Woodpecker** is a lightweight, self-hosted Git service offering Git repository hosting, code review, issue tracking, and CI integration.
+This repository contains a minimal and production-ready [Woodpecker CI](https://woodpecker-ci.org/) stack using Docker Compose.  
+**Woodpecker CI** is a lightweight, self-hosted Continuous Integration (CI) and Continuous Deployment (CD) system, designed to automatically build, test, and deploy your code whenever you push changes to your source code repository.
 
 ---
 
@@ -19,13 +15,13 @@ This repository contains a minimal and production-ready [Woodpecker](https://woo
 tank/
 ├── docker/
 │   ├── compose/
-│   │   └── Woodpecker/              # Git repo lives here
+│   │   └── Woodpecker/             # Git repo lives here
 │   │       ├── docker-compose.yml  # Main Docker Compose config
 │   │       ├── .env                # Runtime environment variables and secrets (gitignored!)
 │   │       ├── env.example         # Example .env file for reference
 │   │       └── README.md           # This file
 │   └── data/
-│       └── Woodpecker/              # Volume mounts and persistent data
+│       └── Woodpecker/             # Volume mounts and persistent data
 ```
 
 ---
