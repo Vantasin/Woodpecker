@@ -83,15 +83,15 @@ tank/
 
    > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_SERVER_VOLUME`.
 
-   > Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
+     - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
 
-   > The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
+     - The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
 
-   > The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
+     - The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
 
-   > You can generate the `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET` by visiting (in Gitea) Settings -> Applications -> Manage OAuth2 applications.
-   
-   > The `WOODPECKER_AGENT_SECRET` is a random user generated password of your choice, avoid special characters and symbols.
+     - You can generate the `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET` by visiting (in Gitea) Settings -> Applications -> Manage OAuth2 applications.
+
+     - The `WOODPECKER_AGENT_SECRET` is a random user generated password of your choice, avoid special characters and symbols.
 
 4. **Start Woodpecker**
 
