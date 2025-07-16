@@ -5,10 +5,10 @@ Woodpecker CI is a lightweight, self-hosted Continuous Integration (CI) and Cont
 # 📦 Woodpecker Docker Compose Stack
 
 [![MIT License](https://img.shields.io/github/license/Vantasin/Woodpecker?style=flat-square)](LICENSE)
-[![Docker Pulls: Woodpecker/Woodpecker](https://img.shields.io/docker/pulls/Woodpecker/Woodpecker?style=flat-square&logo=docker)](https://hub.docker.com/r/Woodpecker/Woodpecker)
+[![Woodpecker CI](https://img.shields.io/badge/Woodpecker%20CI-self--hosted-green?logo=drone&style=flat-square)](https://woodpecker-ci.org/)
 [![ZFS](https://img.shields.io/badge/ZFS-OpenZFS-blue?style=flat-square)](https://openzfs.org/)
 
-This repository contains a minimal and production-ready [Woodpecker](https://Woodpecker.io/) stack using Docker Compose.  
+This repository contains a minimal and production-ready [Woodpecker](https://woodpecker-ci.org/) stack using Docker Compose.  
 **Woodpecker** is a lightweight, self-hosted Git service offering Git repository hosting, code review, issue tracking, and CI integration.
 
 ---
@@ -82,16 +82,11 @@ tank/
    ```
 
    > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_SERVER_VOLUME`.
-
-     - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
-
-     - The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
-
-     - The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
-
-     - You can generate the `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET` by visiting (in Gitea) Settings -> Applications -> Manage OAuth2 applications.
-
-     - The `WOODPECKER_AGENT_SECRET` is a random user generated password of your choice, avoid special characters and symbols.
+   > Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
+   > The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
+   > The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
+   > You can generate the `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET` by visiting (in Gitea) Settings -> Applications -> Manage OAuth2 applications.
+   > The `WOODPECKER_AGENT_SECRET` is a random user generated password of your choice, avoid special characters and symbols.
 
 4. **Start Woodpecker**
 
