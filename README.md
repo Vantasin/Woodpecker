@@ -81,6 +81,17 @@ tank/
 
      - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
 
+         > **Proxy Host:**
+         >  - **Domain Name:** `https://woodpecker.example.com`
+         >  - **Scheme:** `http`
+         >  - **Forward Hostname/IP:** `woodpecker-server`
+         >  - **Forward Port:** `8000`
+         >
+         > **SSL:**
+         >  - Check **Enable SSL**
+         >  - From the **Certificate** dropdown select your `*.example.com` certificate
+         >  - Enable **Force SSL** to redirect all HTTP → HTTPS
+
      - The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
 
      - The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
@@ -99,11 +110,11 @@ tank/
 
 ## 🌐 Accessing Woodpecker Web UI
 
-Once deployed, access Woodpecker using:
+Once deployed, access `Woodpecker` using:
 
-- **Web Interface (HTTP):** `http://localhost:8002` or replace `localhost` with your server’s IP address.  
+- **Web Interface (HTTP):** `https://woodpecker.example.com`.
 - **Login:** You'll see a `Login with Gitea` button.
-> **Note:** If you don’t see the `Login with Gitea` button, check that your `.env` file.
+> **Note:** If you don’t see the `Login with Gitea` button, check your `.env` file for errors with `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET`.
 
 ---
 

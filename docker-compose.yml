@@ -4,8 +4,9 @@ services:
     image: woodpeckerci/woodpecker-server:${VERSION}
     container_name: woodpecker-server
     restart: unless-stopped
-    ports:
-      - "${WOODPECKER_UI_PORT}:8000"     # Woodpecker UI/API
+    networks:
+          - npm_proxy
+          - woodpecker_internal
     expose:
       - "9000"                           # gRPC for agents
     volumes:
@@ -24,6 +25,8 @@ services:
     image: woodpeckerci/woodpecker-agent:${VERSION}
     container_name: woodpecker-agent
     restart: unless-stopped
+    networks:
+          - woodpecker_internal
     depends_on:
       - woodpecker-server
     volumes:
@@ -31,3 +34,9 @@ services:
     environment:
       - WOODPECKER_SERVER=woodpecker-server:9000
       - WOODPECKER_AGENT_SECRET=${WOODPECKER_AGENT_SECRET}
+
+networks:
+  npm_proxy:
+    external: true
+  woodpecker_internal:
+    driver: bridge
