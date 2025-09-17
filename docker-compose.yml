@@ -40,3 +40,4 @@ networks:
     external: true
   woodpecker_internal:
     driver: bridge
+    internal: true
