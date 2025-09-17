@@ -7,8 +7,6 @@ services:
     networks:
           - npm_proxy
           - woodpecker_internal
-    expose:
-      - "9000"                           # gRPC for agents
     volumes:
       - ${WOODPECKER_SERVER_VOLUME}/woodpecker-server:/var/lib/woodpecker/
     environment:
