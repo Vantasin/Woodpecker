@@ -77,7 +77,7 @@ tank/
    sudo chmod 600 .env
    ```
 
-   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_DATA_DIR`.
+   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_EXPERT_FORGE_OAUTH_HOST`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_DATA_DIR`.
 
      - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
 
@@ -94,7 +94,17 @@ tank/
 
      - The `WOODPECKER_ADMIN` is/are the Gitea username(s) allowed as admin.
 
-     - The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
+     - The `WOODPECKER_GITEA_URL` is the internal URL Woodpecker uses to reach Gitea over Docker networking. If your Gitea container is named `gitea` and listens on port `3000`, use:
+
+         ```env
+         WOODPECKER_GITEA_URL=http://gitea:3000
+         ```
+
+     - The `WOODPECKER_EXPERT_FORGE_OAUTH_HOST` is the public Gitea URL users open in the browser for OAuth:
+
+         ```env
+         WOODPECKER_EXPERT_FORGE_OAUTH_HOST=https://gitea.example.com
+         ```
 
      - Create a Gitea OAuth2 application for Woodpecker:
 
