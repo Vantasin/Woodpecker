@@ -77,7 +77,7 @@ tank/
    sudo chmod 600 .env
    ```
 
-   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_SERVER_VOLUME`.
+   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_DATA_DIR`.
 
      - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
 
@@ -96,7 +96,22 @@ tank/
 
      - The `WOODPECKER_GITEA_URL` is the URL used for your Gitea Instance, as such Woodpecker depends on Gitea.
 
-     - You can generate the `WOODPECKER_GITEA_CLIENT` & `WOODPECKER_GITEA_SECRET` by visiting (in Gitea) Settings -> Applications -> Manage OAuth2 applications.
+     - Create a Gitea OAuth2 application for Woodpecker:
+
+         1. In Gitea, open `User Settings` -> `Applications` -> `Manage OAuth2 applications`.
+         2. Create a new OAuth2 application using:
+            - **Application Name:** `Woodpecker`
+            - **Redirect URI:** `https://woodpecker.example.com/authorize`
+            - **Confidential Client:** enabled
+         3. Replace `https://woodpecker.example.com` with your actual `WOODPECKER_HOST` value. The redirect URI must match exactly, with `/authorize` appended.
+         4. After saving, copy the generated credentials into `.env`:
+
+            ```env
+            WOODPECKER_GITEA_CLIENT=<client-id>
+            WOODPECKER_GITEA_SECRET=<client-secret>
+            ```
+
+         Do not commit your real `.env` file or OAuth client secret.
 
      - The `WOODPECKER_AGENT_SECRET` is a random user generated password of your choice, avoid special characters and symbols.
 

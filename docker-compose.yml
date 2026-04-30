@@ -8,7 +8,7 @@ services:
           - npm_proxy
           - woodpecker_internal
     volumes:
-      - ${WOODPECKER_SERVER_VOLUME}/woodpecker-server:/var/lib/woodpecker/
+      - ${WOODPECKER_DATA_DIR}/woodpecker-server:/var/lib/woodpecker/
     environment:
       - WOODPECKER_HOST=${WOODPECKER_HOST}
       - WOODPECKER_OPEN=${WOODPECKER_OPEN}
@@ -24,14 +24,17 @@ services:
     container_name: woodpecker-agent
     restart: unless-stopped
     networks:
+          - npm_proxy
           - woodpecker_internal
     depends_on:
       - woodpecker-server
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ${WOODPECKER_DATA_DIR}/woodpecker-agent:/etc/woodpecker
     environment:
       - WOODPECKER_SERVER=woodpecker-server:9000
       - WOODPECKER_AGENT_SECRET=${WOODPECKER_AGENT_SECRET}
+      - WOODPECKER_BACKEND_DOCKER_NETWORK=npm_proxy
 
 networks:
   npm_proxy:
