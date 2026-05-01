@@ -77,7 +77,7 @@ tank/
    sudo chmod 600 .env
    ```
 
-   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_EXPERT_FORGE_OAUTH_HOST`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_DATA_DIR`.
+   > **Note:** Be sure to update the `WOODPECKER_HOST`, `WOODPECKER_ADMIN`, `WOODPECKER_GITEA_URL`, `WOODPECKER_EXPERT_FORGE_OAUTH_HOST`, `WOODPECKER_EXPERT_WEBHOOK_HOST`, `WOODPECKER_GITEA_CLIENT`, `WOODPECKER_GITEA_SECRET`, `WOODPECKER_AGENT_SECRET` and if necessary the `WOODPECKER_DATA_DIR`.
 
      - Create the `WOODPECKER_HOST` using [Nginx Proxy Manager](https://github.com/Vantasin/Nginx-Proxy-Manager.git) as a reverse proxy for HTTPS certificates via Let's Encrypt.
 
@@ -105,6 +105,14 @@ tank/
          ```env
          WOODPECKER_EXPERT_FORGE_OAUTH_HOST=https://gitea.example.com
          ```
+
+     - The `WOODPECKER_EXPERT_WEBHOOK_HOST` is the URL Gitea uses to deliver webhooks to Woodpecker. If both containers share a Docker network, use the internal service URL:
+
+         ```env
+         WOODPECKER_EXPERT_WEBHOOK_HOST=http://woodpecker-server:8000
+         ```
+
+       When using the internal URL, Gitea's webhook allowlist must include `woodpecker-server`.
 
      - Create a Gitea OAuth2 application for Woodpecker:
 
